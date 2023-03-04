@@ -83,6 +83,7 @@ class RoleController extends Controller
             'permissions.*' => 'nullable|exists:permissions,name'
         ]);
 
+
         $role->update(['name' => $validatedData['name']]);
 
         $role->syncPermissions($validatedData['permissions'] ?? []);

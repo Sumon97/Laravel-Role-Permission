@@ -24,14 +24,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="permissions">{{ __('Permissions') }}</label>
-
-                                <select name="permissions[]" id="permissions" class="form-control @error('permissions') is-invalid @enderror" multiple>
-                                    @foreach($permissions as $permission)
-                                        <option value="{{ $permission->name }}" {{ in_array($permission->name, old('permissions', $role->permissions()->pluck('name')->toArray())) ? 'selected' : '' }}>{{ $permission->name }}</option>
-                                    @endforeach
-                                </select>
-
+                                <label>{{ __('Permissions') }}</label>
+                                @foreach($permissions as $permission)
+                                    <div class="form-check">
+                                        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" class="form-check-input" id="{{ $permission->name }}" {{ in_array($permission->name, old('permissions', $role->permissions()->pluck('name')->toArray())) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="{{ $permission->name }}">{{ $permission->name }}</label>
+                                    </div>
+                                @endforeach
                                 @error('permissions')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
